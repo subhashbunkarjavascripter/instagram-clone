@@ -1,0 +1,64 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../stylesheets/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    </head>
+    <body>
+        
+    <div id="storymain">
+        
+        
+        <div id="logo">instagram</div>
+        <div id="overlay">
+            <div id="full-story">
+                <% if (story && story.media) { %>
+                    <% if (story.media.endsWith('.mp4')) { %>
+                        <video autoplay>
+                            <source src="<%= '/' + story.media %>" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    <% } else { %>
+                        <img src="<%= '/' + story.media %>" alt="Story Image">
+                    <% } %>
+                <% } else { %>
+                    <p>Story not found or media not available.</p>
+                <% } %>
+                
+                
+                <div id="process">
+                    <div id="groth"></div>
+                </div>
+
+            <div id="user">
+                <div id="storyuser">
+                    <% if (story && story.userProfilePic) { %>
+                        <img src="../images/uploads/<%= story.userProfilePic %>" alt="User">
+                    <% } %>
+                </div>
+                <% if (story && story.user && story.user.username) { %>
+                    <p><%= story.user.username %></p>
+                <% } else { %>
+                    <p>Username not available</p>
+                <% } %>
+                    <i class="ri-more-line"></i>
+                </div>
+            </div>
+        </div>
+        <i id="logo" onclick="overlay()" class="ri-close-line"></i>
+    </div>
+
+
+
+    <script>
+        function overlay(){
+            window.location.href = '/';
+        }
+    </script>
+
+    </body>
+    </html>

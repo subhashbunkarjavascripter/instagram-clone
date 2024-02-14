@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <h1>this is a create post page</h1>
+    <form action="/post?type=<%= type %>" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="type" value="<%= type %>">
+        
+        <input type="file" name="media" accept="image/* , video/*" >
+        <input type="submit">  
+    </form>
+<h5><%= founduser.userid %></h5>
+<hr>
+
+
+</body>
+</html>

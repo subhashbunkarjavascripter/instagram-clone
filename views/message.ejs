@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css" integrity="sha512-ZH3KB6wI5ADHaLaez5ynrzxR6lAswuNfhlXdcdhxsvOUghvf02zU1dAsOC6JrBTWbkE1WNDNs5Dcfz493fDMhA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    button{
+        padding: 12px 22px;
+        border-radius: 10px;
+        background-color: rgb(9, 67, 241);
+        color: #fff;
+        border: none;
+        font-size: 1.3vw;
+    }
+    #right h2{
+        font-size: 2vw;
+        font-weight: 400;
+    }
+    #right #default i{
+        font-size: 6vw;
+        font-weight: lighter;
+        color: blue;
+    }
+</style>
+<body>
+    <div id="msgmain">
+        <div id="left">
+
+            <div class="leftnav">
+                <div class="topnav">
+                     <a href=""><i class="ri-instagram-line"></i></a>
+                </div>
+                <ul>
+                    <a href="/"><i class="ri-home-line"></i></a>
+                    <a href=""><i class="ri-search-line"></i></a>
+                    <a href=""><i class="ri-compass-3-line"></i></a>
+                    <a href="/reels"><i class="ri-clapperboard-fill"></i></a>
+                    <a href="/message"> <i class="ri-messenger-line"></i></a>
+                    <a href=""> <i class="ri-heart-3-line"></i></a>
+                    <a href="/create"> <i class="ri-add-circle-line"></i></a>
+                    <a href="/profile"><i class="ri-user-3-fill"></i></a>
+                </ul>
+                <a href=""><i class="ri-menu-line"></i></a>
+            </div>
+
+            <div class="rightnav">
+                <div class="righttop">
+                    <h4><%= founduser.username %></h4>
+                    <a href=""><i class="ri-edit-box-fill"></i></a>
+                </div>
+                <div class="rightbtm">
+                    <div class="chatnav">
+                        <span>Messages</span>
+                        <span>Requests</span>
+                    </div>
+                    <div class="chatbord">
+                        <div class="chat" onclick="fetchTargetUserData()">
+                            <div class="reciverpic" id="targetUserPic">
+                                <img src="" alt="">
+                            </div>
+                            <div class="reciver" id="targetUserName">
+                                <h4>username</h4>
+                                <p>asfsdfgjhk</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div id="right">
+
+
+            <div id="default">
+                <i class="ri-messenger-line"></i>
+                <h2>Yours messages</h2>
+                <button>send message</button>
+
+            </div>
+
+
+
+            <div class="openchatnav">
+                <div class="reciverpic" id="targetUserImage">
+                    <img src="" alt="">
+                </div>
+                <h3 id="targetUserRealName">@username</h3>
+                <div class="usercontecticon">
+                    <i class="ri-phone-line"></i>
+                    <i class="ri-vidicon-line"></i>
+                    <i class="ri-information-2-line"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+
+        function fetchTargetUserData() {
+            var targetUserId = "";
+            
+            fetch(`/api/user/${targetUserId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(targetUserData => {
+                    if (checkFollowingList(targetUserData.id)) {
+                        openchat(targetUserData);
+                    } else {
+                        alert("You are not following this user.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching target user data:', error.message);
+                });
+        }
+
+
+
+        function checkFollowingList(targetUserId) {
+            var loggedInUserId = "";
+            var followingList = ["", ""]; 
+
+            return followingList.includes(targetUserId);
+        }
+
+ 
+
+        function openchat(targetUserData) {
+            var targetUserPic = document.getElementById("targetUserPic");
+            var targetUserName = document.getElementById("targetUserName");
+            var targetUserImage = document.getElementById("targetUserImage");
+
+            if (!targetUserData || !targetUserData.imageUrl || !targetUserData.realName) {
+                console.error('Invalid target user data:', targetUserData);
+                return; // Exit the function early if user data is missing or incomplete
+            }
+
+            try {
+                // Set real target user data
+                targetUserPic.innerHTML = `<img src="${targetUserData.imageUrl}" alt="">`;
+                targetUserName.innerHTML = `<h4>${targetUserData.realName}</h4>`;
+                targetUserImage.src = targetUserData.imageUrl;
+
+                // Display the chat div
+                document.querySelector(".openchatnav").style.display = "block";
+            } catch (error) {
+                console.error('Error setting target user data:', error);
+            }
+        }
+ 
+
+
+ 
+
+    </script>
+
+
+</body>
+</html>

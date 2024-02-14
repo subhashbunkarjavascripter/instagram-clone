@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>  
+</style>
+<body>
+    <div id="homemain">
+
+    <div class="leftMenu">
+        <div class="logo">
+            <a href="#">
+                <img class="instagramTextLogo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png" alt="">
+            </a>
+        </div>
+
+        <!--LEFT MENU CODES HERE-->
+
+        <ul id="leftMiddle">
+            <a href="/" id="home" class="middleMenu">
+              <i class="ri-home-line"></i>
+                <b>Home</b></a>
+            <a href="" id="search" class="middleMenu">
+              <i class="ri-search-line"></i>
+               <b>  Search</b></a>
+            <a href="" id="discover" class="middleMenu">
+              <i class="ri-compass-3-line"></i>
+                 <b>Explore</b>   </a>
+
+            <a href="/reels" id="reels" class="middleMenu">
+              <i class="ri-clapperboard-fill"></i>
+               <b> Reels</b>
+            </a>
+
+            <a href="/message" id="messages" class="middleMenu">
+              <i class="ri-messenger-line"></i>
+                <b>Messages</b></a>
+            <a href="" id="notifications" class="middleMenu">
+              <i class="ri-heart-3-line"></i>
+                <b>Notifications</b></a>
+                <a href="#" id="create-content" class="middleMenu">
+                    <i class="ri-add-circle-line"></i>
+                    <b>Create</b>
+                  </a>
+
+                <div id="create-options" style="display: none;">
+                    <button id="create-post">Create Post</button>
+                    <button id="create-story">Create Story</button>
+                  </div>
+
+
+            <a href="/profile" id="profile"  class="middleMenu">
+              <i class="ri-user-line"></i>
+                <b><%= founduser.username %></b></a>
+            <a href="" id="more" class="bottomMenu">
+              <i class="ri-menu-line"></i>
+                    More</a>
+        </ul>
+    </div>
+
+    <div id="homecenter">
+
+        <!--STORY CODES HERE-->
+        
+        <div class="story" style="background-color: aqua;">
+            <div class="storyArea">
+        
+              <% let userStoriesMap = new Map(); %>
+              <% userStories.forEach(userStory => { %>
+                  <% const userId = userStory.user._id.toString(); %>
+                  <% if (!userStoriesMap.has(userId)) { %>
+                      <div style="overflow: hidden;" class="stories" onclick="redirectToViewStory('<%= userStory._id %>')">
+                          <% if (userStory.user && userStory.user.image) { %>
+                              <img src="/images/uploads/<%= userStory.user.image %>" alt="">
+                          <% } else { %>
+                              <!-- Handle the case where user image is not available -->
+                          <% } %>
+                          <p><%= userStory.user.username %></p>
+                      </div>
+                      <% userStoriesMap.set(userId, true); %>
+                  <% } %>
+              <% }); %>
+                  
+                  
+
+        </div>
+    </div>
+    
+
+ 
+    <!-- POST CODES HERE -->
+    <div id="post">
+<% allposts.reverse().forEach(function(post){ %>
+         <div class="post1">
+             <div class="user">
+                 <div style="width: 4vw; height:4vw;overflow:hidden; margin-left:5px; border:2px solid salmon; background-color:#cccccc; border-radius:50%; " class="userpic">
+                     <img style="object-fit: cover; width:100%; height:100%;" src="../images/uploads/<%=  post.userid.image %>" alt="">
+                    </div>
+                    <p class="postID">
+                        <b> 
+                          <a href="/profile/<%= post.userid._id %>"> <%= post.userid.username %> </a>
+                        </b>
+                    </p>
+     
+                    <div class="dots">
+                        <i style="font-size: 2vw;" class="ri-more-line"></i>
+                    </div>
+             </div>
+
+             <% if(post.image){ %>
+                <img class="firstPost" src="<%= post.image %>" alt="post1">
+             <% } %>
+
+             <% if(post.video){%>
+                <video class="firstPost" autoplay loop controls>
+                    <source src="<%= post.video %>" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+             <%} %>
+
+             <div class="reactions">
+                 <li><i class="ri-heart-3-line"></i></li>
+                 <li><i class="ri-chat-1-line"></i></li>
+                 <li><i class="ri-send-plane-fill"></i></li>
+                 <li class="save"><i class="ri-bookmark-fill"></i></li>
+             </div>
+             
+             <p class="like" style="padding: 0.3rem; font-size: 0.9rem;"><b>0.000 likes</b></p>
+             <p style="padding: 0.3rem; font-size: 0.9rem;"><b style="cursor: pointer;">user1</b> &nbsp; Lorem ipsum dolor sit amet.</p>
+             <p style="padding: 0.3rem; font-size: 0.9rem; cursor: pointer;" class="comment">View all 5 comments</p>
+             <p style="padding: 0.3rem; font-size: 0.9rem; cursor: pointer;" class="addComment" >Add a comment...</p>
+     
+         </div>
+
+         <%}) %> 
+        </div>
+ 
+     
+        <!--SUGGESTED USERS CODES HERE-->
+        
+    </div>
+    <div class="rightPanel">
+        <ul class="suggestions">
+            <li style=" background-image:url(https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg); background-size: cover;" class="sugProfile">
+                <p class="sugUser">user</p>
+                <p class="sugFollow">Switch</p>
+            </li>
+                <p class="sugText" style=" color: rgb(123, 123, 123); font-weight: bold; position: absolute; margin: 1.1rem 0 0 0.5rem; font-size: 0.9rem;">Suggested for you</p>
+                <p class="sugSeeAll" style=" color: rgb(123, 123, 123); font-weight: bold; position: absolute; margin: 1.2rem 0 0 0.5rem; right: 0.7rem; font-size: 0.8rem; cursor: pointer;">See All</p>
+                <br><br>
+                <li style=" background-image:url(https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg); background-size: cover;" class="sugProfile">
+                <p class="sugUser">user8</p>
+                <p class="sugFollow">Follow</p>
+            </li>
+            <li style=" background-image:url(https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg); background-size: cover;" class="sugProfile">
+                <p class="sugUser"> user8</p>
+                <p class="sugFollow">Follow</p>
+            </li>
+            <li style=" background-image:url(https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg); background-size: cover;" class="sugProfile">
+                <p class="sugUser">user8</p>
+                <p class="sugFollow">Follow</p>
+            </li>
+            <li style=" background-image:url(https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg); background-size: cover;" class="sugProfile">
+                <p class="sugUser">user8</p>
+                <p class="sugFollow">Follow</p>
+            </li>
+            <li style=" background-image:url(https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg); background-size: cover;" class="sugProfile">
+                <p class="sugUser">user8</p>
+                <p class="sugFollow">Follow</p>
+            </li>
+            <p class="sugLinks">About . Help . Press . API . Jobs . Privacy . Terms . <br> Locations . Language . Meta Verified</p>
+        </ul>
+    </div> 
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js" integrity="sha512-tE1z+95+lMCGwy+9PnKgUSIeHhvioC9lMlI7rLWU0Ps3XTdjRygLcy4mLuL0JAoK4TLdQEyP0yOl/9dMOqpH/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+    <script>
+       
+     document.addEventListener('DOMContentLoaded', function () {
+    var videos = document.querySelectorAll('.firstPost');
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.play();
+            } else {
+                entry.target.pause();
+                entry.target.currentTime = 0;
+            }
+        });
+    }, { threshold: 0.5 });
+
+    videos.forEach(function (video) {
+        observer.observe(video);
+    });
+});
+
+
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
+
+    <script>
+      function redirectToViewStory(storyId) {
+        window.location.href = `/view-story/${storyId}`;
+    }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const createOptions = document.getElementById('create-options');
+          const createContentLink = document.getElementById('create-content');
+          const createPostButton = document.getElementById('create-post');
+          const createStoryButton = document.getElementById('create-story');
+      
+          createContentLink.addEventListener('click', function () {
+            createOptions.style.display = (createOptions.style.display === 'none' || createOptions.style.display === '') ? 'block' : 'none';
+          });
+      
+          createPostButton.addEventListener('click', function () {
+            window.location.href = '/create?type=post';
+          });
+      
+          createStoryButton.addEventListener('click', function () {
+            window.location.href = '/create?type=story';
+          });
+        });
+      </script>
+      
+
+
+</body>
+
+
+</html>

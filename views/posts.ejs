@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+    <h1>posts by you</h1>
+
+    <% founduser.posts.reverse().forEach(function(post){ %>
+  <div style="height: 40%; width:20%; background-color:rgb(190, 53, 53);" class="ppost">
+    <img src="<%= post.image %>" alt="post">
+    <h2><%=post.name%></h2>
+
+  </div>
+    <%}) %>
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</body>
+</html>

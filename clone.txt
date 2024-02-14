@@ -1,0 +1,146 @@
+   
+        // userSchema =>
+
+                //  1.  username ;
+                //  2.  password ;
+                //  3.  email ;
+                //  4.  profileimg ;
+                //  5.  createdDate;
+
+        // PostSchema =>
+
+                  // 1. user ; 
+                  // 2. caption ;
+                  // 3. imgUrl ;
+                  // 4. Likes ;
+                  // 5. Comments ;
+                  // 6.      
+
+         // FollowersSchema =>
+
+                    //  1. follower ;
+                    //  2. following ;
+
+          // CommentSchema =>
+
+                      // 1. post ;
+                      // 2. user ;
+                      // 3. text ;
+
+        // ReelSchema =>
+
+                    //  1. user ;
+                    //  2. videoUrl ;
+                    //  3. caption ;
+                    //  4. Likes ;
+                    //  5. comments ;
+                    //  6. createdAt ;
+ 
+        //  storySchema =>
+
+                        // 1. mediaUrl ;
+                        // 2. caption ; 
+                        // 3. viewers ;
+                        // 4. user ;
+                        // 5. createdAt ;
+                        // 6. expiresAt ;
+                       //  7. isHidden ;
+
+        //  massageSchema =>
+  
+                          //  1. sender ;
+                          //  2. receiver ;
+                          //  3. text ; 
+                          //  4. timeStamp ;
+                          //  5.
+
+        //  blocklistSchema =>
+
+                              // 1. user ;
+                              // 2. blockedUser ;
+                                     
+         // explore  trendingcontent Schema =>
+
+                              // 1. title: String;
+                              // 2. description: String;
+        // language performence Schema => 
+                         
+                             // 1. user;
+                             // 2. languages; 
+       
+        // privacySettingSchema =>
+
+                             // 1. user ;
+                             // 2. public profile;
+                             // 3. allowFriendRequest;
+                             // 4. allow Massage;
+                             // 5. blockedUser;
+
+        // closeFriend =>
+
+                             // 1. user;
+                             // 2. friend; 
+
+        //  shareSchema =>
+                             //  1. user;
+                             //  2. content;
+                             //  3. contentType;
+                             //  4. timeStamp;
+
+        //  notificationSchema=>
+                             //  1. user;
+                             //  2. message;
+                             //  3.timeStamp;
+                             //  4. isRead;   
+
+       //  timeUsageSchema =>
+                             //  1. user ;
+                             //  2. activity;
+                             //  3. starttime;
+                             //  4. endtime;
+
+       //  searcSchema =>
+                            //   1. user;
+                            //   2. query;
+                            //   3. timeStamp;
+
+       // intrestSchema =>
+                            //  1. user;
+                            //  2. name;
+
+       // recentlyDeletedSchema= >
+                            //  1. user;
+                            //  2. content;
+                            //  3. contentType;
+                            //  4. deletedAt;
+
+       // hightlightSchema =>
+                            //  1. user;
+                            //  2. content;
+                            //  3. contentType;
+                            //  4. color;
+                            //  5. notes;
+
+      // favoriteSchema =>
+                            //  1. user;
+                            //  2. content;
+                            //  3. contentType;
+
+
+
+  <% let userStoriesMap = new Map(); %>
+                <% userStories.forEach(userStory => { %>
+                    <% const userId = userStory.user._id.toString(); %>
+                    <% if (!userStoriesMap.has(userId)) { %>
+                        <div style="overflow: hidden;" class="stories" onclick="redirectToViewStory('<%= userId %>')">
+                            <% if (userStory.user && userStory.user.image) { %>
+                                <img src="/images/uploads/<%= userStory.user.image %>" alt="">
+                            <% } else { %>
+                                <!-- Handle the case where user image is not available -->
+                            <% } %>
+                            <p><%= userStory.user.username %></p>
+                        </div>
+                        <% userStoriesMap.set(userId, true); %>
+                    <% } %>
+                <% }); %>
+
