@@ -372,16 +372,7 @@ html,body{
 .storyArea::-webkit-scrollbar{
   display: none;
 }
-/* .storycard{
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50px;
-  border: 3px solid #f9529a ;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-} */
+ 
 
 
 .stories img{

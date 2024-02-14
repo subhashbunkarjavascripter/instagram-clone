@@ -19,7 +19,7 @@
             </a>
         </div>
 
-        <!--LEFT MENU CODES HERE-->
+      
 
         <ul id="leftMiddle">
             <a href="/" id="home" class="middleMenu">
@@ -65,7 +65,6 @@
 
     <div id="homecenter">
 
-        <!--STORY CODES HERE-->
         
         <div class="story" style="background-color: aqua;">
             <div class="storyArea">
@@ -78,7 +77,6 @@
                           <% if (userStory.user && userStory.user.image) { %>
                               <img src="/images/uploads/<%= userStory.user.image %>" alt="">
                           <% } else { %>
-                              <!-- Handle the case where user image is not available -->
                           <% } %>
                           <p><%= userStory.user.username %></p>
                       </div>
@@ -93,7 +91,7 @@
     
 
  
-    <!-- POST CODES HERE -->
+   
     <div id="post">
 <% allposts.reverse().forEach(function(post){ %>
          <div class="post1">
@@ -141,7 +139,7 @@
         </div>
  
      
-        <!--SUGGESTED USERS CODES HERE-->
+       
         
     </div>
     <div class="rightPanel">
